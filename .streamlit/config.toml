@@ -1,0 +1,7 @@
+[theme]
+base = "dark"
+primaryColor = "#004225"          # British racing green
+backgroundColor = "#0b0f16"       # dark neutral
+secondaryBackgroundColor = "#151a22"
+textColor = "#f4f4f5"
+font = "sans serif"
