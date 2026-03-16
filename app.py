@@ -84,70 +84,7 @@ You choose the scenario (risk, complexity, flexibility); the model simulates man
 and summarizes the expected scores and their likely range.
 """
 )
-# Custom styling: neutral dark + British racing green accents
-st.markdown(
-    """
-    <style>
-    /* Page width a bit tighter */
-    .block-container {
-        max-width: 1100px;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
 
-    /* Primary button (Run Simulation) */
-    .stButton > button {
-        background-color: #004225;
-        color: #f9fafb;
-        border-radius: 999px;
-        border: none;
-        padding: 0.6rem 1.6rem;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        transition: all 0.18s ease-in-out;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    }
-    .stButton > button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-        background-color: #016534; /* slightly brighter green */
-    }
-
-    /* Sidebar background slightly lighter than main */
-    section[data-testid="stSidebar"] {
-        background-color: #10141d;
-    }
-
-    /* Sliders: make the thumb and filled track green */
-    div.stSlider > div[data-baseweb="slider"] > div > div {
-        background: linear-gradient(
-            to right,
-            #004225 0%,
-            #004225 50%,
-            #3f3f46 50%,
-            #3f3f46 100%
-        );
-        border-radius: 999px;
-        border: 1px solid #1f2933;
-        transition: background 150ms ease-in;
-    }
-    div.stSlider > div[data-baseweb="slider"] > div > div > div[role="slider"] {
-        background-color: #004225 !important;
-        box-shadow: 0 0 0 0.18rem rgba(0, 66, 37, 0.45) !important;
-    }
-    div.stSlider > div[data-baseweb="slider"] > div > div > div > div {
-        color: #e5e7eb;
-        font-weight: 500;
-    }
-
-    /* Subheaders spacing */
-    h2, h3 {
-        margin-top: 1.5rem;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
 
 
 # ---- Sidebar: simple scenario inputs ----
