@@ -18,17 +18,32 @@ def classify_level(score):
         return "High"
 
 
-def scr_status_color(scr_mean):
-    """Background color for the summary card based on SCR."""
+def scr_theme(scr_mean):
+    """
+    Return colors for background, summary card, and accent
+    based on SCR mean (0–100).
+    """
     if scr_mean >= 70:
-        # good – soft green
-        return "#dcfce7"
+        # High resilience – mint green
+        return {
+            "page_bg": "#e7f9ef",
+            "card_bg": "#dcfce7",
+            "accent": "#16a34a",
+        }
     elif scr_mean >= 40:
-        # okay – soft yellow
-        return "#fef9c3"
+        # Medium – warm sand
+        return {
+            "page_bg": "#fdf5d6",
+            "card_bg": "#fef9c3",
+            "accent": "#d97706",
+        }
     else:
-        # risky – soft red
-        return "#fee2e2"
+        # Low – soft coral
+        return {
+            "page_bg": "#fdecec",
+            "card_bg": "#fee2e2",
+            "accent": "#b91c1c",
+        }
 
 
 def insight_text(sr, scc, sf, ams_mean, scr_mean):
@@ -161,12 +176,42 @@ if st.button("Run Simulation"):
     ams_mean = summary["AMS_mean"]
     scr_mean = summary["SCR_mean"]
 
+    # ---------- Dynamic theme based on SCR ----------
+    theme_colors = scr_theme(scr_mean)
+
+    # Inject CSS to change page background and primary button color
+    st.markdown(
+        f"""
+        <style>
+        /* Main content background */
+        .block-container {{
+            background-color: {theme_colors['page_bg']} !important;
+        }}
+        /* Primary button */
+        .stButton > button {{
+            background-color: {theme_colors['accent']} !important;
+            color: white !important;
+            border-radius: 999px;
+            border: none;
+            padding: 0.45rem 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            transition: all 0.15s ease-in-out;
+        }}
+        .stButton > button:hover {{
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     # ---------- Scenario status card with color ----------
-    status_color = scr_status_color(scr_mean)
     st.markdown(
         f"""
         <div style="
-            background-color:{status_color};
+            background-color:{theme_colors['card_bg']};
             border-radius:18px;
             padding:1rem 1.5rem;
             margin-top:1.0rem;
