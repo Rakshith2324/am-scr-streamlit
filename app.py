@@ -241,7 +241,7 @@ else:
 st.markdown(
     "<hr style='margin-top:2rem;margin-bottom:0.5rem;'>"
     "<p style='font-size:0.8rem;color:gray;'>"
-    "Built by Rakshith Srinivasan – AM Supply Chain Resilience Simulator"
+    "Built by Rakshith Srinivasan"
     "</p>",
     unsafe_allow_html=True,
 )
