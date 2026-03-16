@@ -18,6 +18,19 @@ def classify_level(score):
         return "High"
 
 
+def scr_status_color(scr_mean):
+    """Background color for the summary card based on SCR."""
+    if scr_mean >= 70:
+        # good – soft green
+        return "#dcfce7"
+    elif scr_mean >= 40:
+        # okay – soft yellow
+        return "#fef9c3"
+    else:
+        # risky – soft red
+        return "#fee2e2"
+
+
 def insight_text(sr, scc, sf, ams_mean, scr_mean):
     """Generate a few simple bullet-point insights."""
     msgs = []
@@ -86,7 +99,6 @@ and summarizes the expected scores and their likely range.
 )
 
 
-
 # ---- Sidebar: simple scenario inputs ----
 st.sidebar.header("Scenario Inputs (0–100)")
 
@@ -149,6 +161,32 @@ if st.button("Run Simulation"):
     ams_mean = summary["AMS_mean"]
     scr_mean = summary["SCR_mean"]
 
+    # ---------- Scenario status card with color ----------
+    status_color = scr_status_color(scr_mean)
+    st.markdown(
+        f"""
+        <div style="
+            background-color:{status_color};
+            border-radius:18px;
+            padding:1rem 1.5rem;
+            margin-top:1.0rem;
+            margin-bottom:1.5rem;
+            border:1px solid rgba(15,23,42,0.06);
+        ">
+            <p style="font-size:0.8rem; font-weight:600; letter-spacing:0.12em;
+                      text-transform:uppercase; margin:0 0 0.35rem 0; color:#065f46;">
+                Scenario summary
+            </p>
+            <p style="font-size:1rem; margin:0;">
+                Overall resilience is <strong>{classify_level(scr_mean)}</strong>
+                ({scr_mean:.0f}/100) and AM scalability is
+                <strong>{classify_level(ams_mean)}</strong> ({ams_mean:.0f}/100).
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
     # ---------- High-level cards ----------
     col_top1, col_top2 = st.columns(2)
 
@@ -180,7 +218,7 @@ if st.button("Run Simulation"):
     st.markdown(
         """
 The scores are based on a Bayesian model that encodes how supply risk, complexity,
-and sourcing flexibility influence AM scalability and resilience.[web:12]
+and sourcing flexibility influence AM scalability and resilience.
 """
     )
 
@@ -240,6 +278,8 @@ and sourcing flexibility influence AM scalability and resilience.[web:12]
 
 else:
     st.info("Choose your scenario on the left and click **Run Simulation** to get results.")
+
+# Footer
 st.markdown(
     "<hr style='margin-top:2rem;margin-bottom:0.5rem;'>"
     "<p style='font-size:0.8rem;color:gray;'>"
