@@ -238,3 +238,10 @@ and sourcing flexibility influence AM scalability and resilience.[web:12]
 
 else:
     st.info("Choose your scenario on the left and click **Run Simulation** to get results.")
+st.markdown(
+    "<hr style='margin-top:2rem;margin-bottom:0.5rem;'>"
+    "<p style='font-size:0.8rem;color:gray;'>"
+    "Built by Rakshith Srinivasan – AM Supply Chain Resilience Simulator"
+    "</p>",
+    unsafe_allow_html=True,
+)
