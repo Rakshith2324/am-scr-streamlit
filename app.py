@@ -81,7 +81,7 @@ This tool uses a research-based causal model to estimate:
 - **Supply Chain Resilience (SCR)** – how well your supply chain can absorb and recover from disruptions.
 
 You choose the scenario (risk, complexity, flexibility); the model simulates many plausible futures
-and summarizes the expected scores and their likely range.[web:12]
+and summarizes the expected scores and their likely range.
 """
 )
 
